@@ -25,3 +25,9 @@ void spiWrite(uint8_t reg, uint8_t value){
     SPI.endTransaction();
     delayMicroseconds(SPI_DELAY_WRITE);
 }
+
+void toggleCS(void){
+    digitalWrite(CS_PIN, HIGH);
+    delayMicroseconds(1);
+    digitalWrite(CS_PIN, LOW);
+}

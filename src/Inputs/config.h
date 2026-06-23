@@ -5,3 +5,4 @@
 #define DELTAX 0 // temp value
 #define DELTAY 0 // temp value
 #define MOTION 0 //temp value
+#define INITIALIZE_REGISTER 0x3A

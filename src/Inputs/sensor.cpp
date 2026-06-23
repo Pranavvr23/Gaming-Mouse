@@ -54,6 +54,7 @@ int initializeSensor(void){
     delay(50);
     toggleCS();
     spiWrite(INITIALIZE_REGISTER, 0x5A);
+    Serial.println(spiRead(0x00));
     delay(5);
     spiWrite(0x7F, 0x07);
     spiWrite(0x40, 0x41);
@@ -194,19 +195,23 @@ int initializeSensor(void){
     spiWrite(0x22, 0x01);
     int count = 0;
     for(; ;){
-        if(spiRead(0x6c) == 0x80)break;
-         if(count >= 60){
-            bootFailure();
+        if(spiRead(0x6c) == 0x80){
+            Serial.println("we have liftoff");
             break;
+        }
+         if(count >= 1000){
+            bootFailure();
+            return 0;
         } 
         count ++;
-        delayMicroseconds(1);
+        delay(1);
     }
     spiWrite(0x22, 0x00);
     spiWrite(0x55, 0x00);
     spiWrite(0x7f, 0x07);
     spiWrite(0x40, 0x40);
     spiWrite(0x7f, 0x00);
+    return 1;
 }
 
 int motionPinInterrupt(void){

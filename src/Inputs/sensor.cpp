@@ -26,17 +26,14 @@
 //     //get teh register value for cpi
 // }
 
-// int setReportRate(void){
-//     // set the report rate of the sensor (?)
-// }
+void setCPI(uint8_t xLow, uint8_t xHigh){
+    // set the report rate of the sensor (?)
+    spiWrite(MOTION_CTRL, 0x00);
+    spiWrite(RESOLUTION_X_LOW, xLow);
+    spiWrite(RESOLUTION_X_HIGH, xHigh);
+    spiWrite(SET_RESOLUTION, 0x01);
+}
 
-// int getChangeX(void){
-//     //return the value in deltax register
-// }
-
-// int getChangeY(void){
-//     //return the value in deltay register
-// }
 
 int initializeSPI(void){
     //initialize the spi communication protocol to fit 

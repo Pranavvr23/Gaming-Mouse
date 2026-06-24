@@ -33,3 +33,20 @@ void toggleCS(void){
     delayMicroseconds(1);
     digitalWrite(CS_PIN, HIGH);
 }
+
+void burst(uint8_t *motion, int16_t *dx, int16_t *dy){
+    uint8_t buffer[12];
+    SPI.beginTransaction(mySettings);
+    digitalWrite(CS_PIN, LOW);
+    SPI.transfer(0x16);
+    delayMicroseconds(SPI_DELAY_READ);
+    for(int i = 0; i < 12; i++){
+        buffer[i] = SPI.transfer(0x00);
+    }
+    digitalWrite(CS_PIN, HIGH);
+    SPI.endTransaction();
+    delayMicroseconds(SPI_DELAY_READ);
+    *motion = buffer[0];
+    *dx = (int16_t) ((buffer[2]) | (buffer[3] << 8)); 
+    *dy = (int16_t) ((buffer[4]) | (buffer[5] << 8));
+}

@@ -10,4 +10,5 @@
 uint8_t spiRead(uint8_t reg);
 void spiWrite(uint8_t reg, uint8_t value);
 void toggleCS(void);
+void burst(uint8_t *motion, int16_t *dx, int16_t *dy);
 

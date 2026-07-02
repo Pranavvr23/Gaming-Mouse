@@ -1,3 +1,6 @@
+#include "Adafruit_TinyUSB.h"
+
+
 #define SCK_PIN 2
 #define MISO_PIN 4
 #define MOSI_PIN 3
@@ -12,5 +15,4 @@
 #define RESOLUTION_X_LOW 0x48
 #define RESOLUTION_X_HIGH 0x49
 #define SET_RESOLUTION 0x47
-#define DEFAULT_LOW_REPORT 0
-#define DEFAULT_HIGH_REPORT 10
+#define DEFAULT_DPI 3200

@@ -18,13 +18,14 @@
 // 3. Delta_y - y movement
 // 4. Cpi regiesters - set sensitivity
 
-// int setMouseCPI(int cpi){
-//     // set the register with the mouse cpi to int cpi
-// }
-
-// int getMouseCPI(void){
-//     //get teh register value for cpi
-// }
+void configDPI(uint16_t dpi){
+    uint8_t high = 0;
+    uint8_t low = 0;
+    dpi /= 50;
+    high = (dpi >> 8);
+    low = (uint8_t)(dpi);
+    setCPI(low, high);
+}
 
 void setCPI(uint8_t xLow, uint8_t xHigh){
     // set the report rate of the sensor (?)
@@ -208,6 +209,7 @@ int initializeSensor(void){
     spiWrite(0x7f, 0x07);
     spiWrite(0x40, 0x40);
     spiWrite(0x7f, 0x00);
+    configDPI(DEFAULT_DPI);
     return 1;
 }
 
